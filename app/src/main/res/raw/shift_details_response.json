@@ -1,0 +1,10 @@
+{
+  "status": 200,
+  "message": "200 OK",
+  "shift": {
+            "id": 1,
+            "status": "started",
+            "driver_id": 2,
+            "driver_name": "Joe Trucker"
+          }
+}

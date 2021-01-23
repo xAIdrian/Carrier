@@ -1,0 +1,9 @@
+format = (column,type)
+
+id, primary key
+status, int
+
+# possible statuses are:
+# 0 - scheduled
+# 1 - started
+# 2 - finished
