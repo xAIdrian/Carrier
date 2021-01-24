@@ -59,19 +59,21 @@ class ShiftDetailsActivity : MvpActivity<ShiftDetailsPresenter, ShiftDetailsMvpC
     override fun errorMessage(messageString: String) {
         statusView.text = messageString
 
-        statusView.visibility = View.GONE
-        driverIdView.visibility = View.GONE
-        driverNameView.visibility = View.GONE
+        statusView.visibility = View.VISIBLE
+        driverIdView.visibility = View.INVISIBLE
+        driverNameView.visibility = View.INVISIBLE
     }
 
     override fun showLoading(isVisible: Boolean) {
         if (isVisible) {
             loadingProgress.visibility = View.VISIBLE
-            statusView.visibility = View.GONE
-            driverIdView.visibility = View.GONE
-            driverNameView.visibility = View.GONE
+
+            statusView.visibility = View.INVISIBLE
+            driverIdView.visibility = View.INVISIBLE
+            driverNameView.visibility = View.INVISIBLE
         } else {
             loadingProgress.visibility = View.GONE
+
             statusView.visibility = View.VISIBLE
             driverIdView.visibility = View.VISIBLE
             driverNameView.visibility = View.VISIBLE

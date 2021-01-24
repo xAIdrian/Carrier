@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import java.io.InputStream
 import javax.inject.Inject
 
-class ResourceProvider @Inject constructor(
+open class ResourceProvider @Inject constructor(
     private val context: Context
 ) {
     fun getRawResource(@RawRes resource: Int): InputStream {

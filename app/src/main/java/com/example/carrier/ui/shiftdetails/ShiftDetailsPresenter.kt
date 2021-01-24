@@ -12,31 +12,34 @@ import javax.inject.Inject
 class ShiftDetailsPresenter @Inject constructor(
     private val repository: CarrierRepository,
     private val resourceProvider: ResourceProvider
-): BasePresenter<ShiftDetailsMvpContract.View>(), ShiftDetailsMvpContract.Presenter {
+) : BasePresenter<ShiftDetailsMvpContract.View>(), ShiftDetailsMvpContract.Presenter {
 
     private val disposable = CompositeDisposable()
 
     override fun getShifts() {
-        disposable.add(repository.getShifts()
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                mvpView?.showLoading(true)
-            }.subscribe(
-                {
-                    mvpView?.showLoading(false)
-                    if (it.status == SUCCESS_CODE) {
-                        mvpView?.showCarrierShift(it.shift)
-                    } else {
-                        mvpView?.errorMessage(resourceProvider.getStringRes(R.string.somethings_went_wrong))
-                    }
-                },
-                {
+        disposable.add(
+            repository.getShifts()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
                     mvpView?.showLoading(true)
-                    mvpView?.errorMessage(
-                        it.message ?: resourceProvider.getStringRes(R.string.somethings_went_wrong)
-                    )
-                }
-            ))
+                }.subscribe(
+                    {
+                        mvpView?.showLoading(false)
+                        if (it.status == SUCCESS_CODE) {
+                            mvpView?.showCarrierShift(it.shift)
+                        } else {
+                            mvpView?.errorMessage(it.message)
+                        }
+                    },
+                    {
+                        mvpView?.showLoading(false)
+                        mvpView?.errorMessage(
+                            it.message
+                                ?: resourceProvider.getStringRes(R.string.somethings_went_wrong)
+                        )
+                    }
+                )
+        )
     }
 
     override fun sendHello() {
@@ -46,13 +49,10 @@ class ShiftDetailsPresenter @Inject constructor(
                 mvpView?.showLoading(true)
             }.subscribe(
                 {
-                    if (it.success) {
-                        mvpView?.showLoading(false)
-                    } else {
-                        mvpView?.errorMessage(resourceProvider.getStringRes(R.string.somethings_went_wrong))
-                    }
+                    mvpView?.showLoading(false)
                 },
                 {
+                    mvpView?.showLoading(false)
                     mvpView?.errorMessage(resourceProvider.getStringRes(R.string.somethings_went_wrong))
                 }
             ))

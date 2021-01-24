@@ -2,7 +2,7 @@ package com.example.carrier.dagger
 
 import android.app.Application
 import android.content.Context
-import com.example.carrier.domain.local.ShiftDbHelper
+import com.example.carrier.domain.local.ShiftDatabaseHelper
 import com.example.carrier.domain.service.FakeInterceptor
 import com.example.carrier.domain.service.RetrofitServiceBuilder
 import dagger.Module
@@ -27,5 +27,5 @@ class ApplicationModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun provideDatabase(context: Context) = ShiftDbHelper(context)
+    fun provideDatabase(context: Context) = ShiftDatabaseHelper(context)
 }

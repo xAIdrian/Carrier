@@ -13,6 +13,8 @@ class FakeInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        Thread.sleep(2500)
+
         val uri: URI = chain.request().url().uri() // Get Request URI
         val parsedPath = uri.path.substring(1).split("/").toTypedArray()
 
@@ -21,11 +23,7 @@ class FakeInterceptor @Inject constructor(
             parsedPath.size == 3 && parsedPath[0] == "shifts" && parsedPath[2] == "messages" -> {
                 //all posts ids get the same response
                 statusCode = SUCCESS_CODE
-                "{\n" +
-                        "  \"status\": 200,\n" +
-                        "  \"message\": \"Successful Post\",\n" +
-                        "  \"success\": true \n" +
-                        "}"
+                "Successful Post"
             }
             parsedPath.size == 2 && parsedPath[0] == "shifts" && parsedPath[1] == "1" -> {
                 //we are getting the only carrier shift in the application
@@ -38,18 +36,12 @@ class FakeInterceptor @Inject constructor(
             }
             parsedPath.size == 2 && parsedPath[0] == "shifts" && parsedPath[1].toInt() > 1 -> {
                 statusCode = ERROR_CODE
-                "{\n" +
-                        "  \"status\": 400,\n" +
-                        "  \"message\": \"Cannot find shift associated with this ID\"\n" +
-                        "}"
+                "Cannot find shift associated with this ID"
             }
             else -> {
                 //catching everything else
                 statusCode = ERROR_CODE
-                "{\n" +
-                        "  \"status\": 400,\n" +
-                        "  \"message\": \"Malformed request\"\n" +
-                        "}"
+                "Malformed request"
             }
         }
         return Response.Builder()

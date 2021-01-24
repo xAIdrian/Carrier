@@ -1,8 +1,6 @@
 package com.example.carrier.ui.shiftdetails
 
-
 import com.example.carrier.model.CarrierShift
-
 
 /**
  * Interfaces help with decoupling the parts of the app.

@@ -1,7 +1,6 @@
 package com.example.carrier.model
 
 import com.google.gson.annotations.SerializedName
-import java.sql.Types
 import java.util.*
 
 /**

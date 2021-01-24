@@ -18,6 +18,7 @@ import android.provider.BaseColumns
 object ShiftDatabaseContract {
     object ShiftEntry : BaseColumns {
         const val TABLE_NAME = "CarrierShifts"
+        const val COLUMN_NAME_SHIFT_ID = "id"
         const val COLUMN_NAME_STATUS = "status"
     }
 
@@ -25,6 +26,7 @@ object ShiftDatabaseContract {
     const val SQL_CREATE_ENTRIES =
         "CREATE TABLE ${ShiftEntry.TABLE_NAME} (" +
                 "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                "${ShiftEntry.COLUMN_NAME_SHIFT_ID} INTEGER," +
                 "${ShiftEntry.COLUMN_NAME_STATUS} TEXT)"
 
     const val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS ${ShiftEntry.TABLE_NAME}"
