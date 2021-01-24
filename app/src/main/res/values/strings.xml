@@ -2,6 +2,7 @@
     <string name="app_name">Carrier</string>
     <string name="get_error">Error getting and parsing web service</string>
     <string name="post_error">Error parsing and updating our web service</string>
-    <string name="somethings_went_wrong">Some things went wrong fetching items</string>
+    <string name="somethings_went_wrong">Some things went wrong</string>
     <string name="hello_world">Hello World!</string>
+    <string name="success">Successful Post</string>
 </resources>

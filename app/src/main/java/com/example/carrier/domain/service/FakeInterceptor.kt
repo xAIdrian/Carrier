@@ -23,7 +23,11 @@ class FakeInterceptor @Inject constructor(
             parsedPath.size == 3 && parsedPath[0] == "shifts" && parsedPath[2] == "messages" -> {
                 //all posts ids get the same response
                 statusCode = SUCCESS_CODE
-                "Successful Post"
+                "{\n" +
+                        "  \"status\": 200,\n" +
+                        "  \"message\": \"Successful Post\",\n" +
+                        "  \"success\": true \n" +
+                        "}"
             }
             parsedPath.size == 2 && parsedPath[0] == "shifts" && parsedPath[1] == "1" -> {
                 //we are getting the only carrier shift in the application
@@ -36,12 +40,18 @@ class FakeInterceptor @Inject constructor(
             }
             parsedPath.size == 2 && parsedPath[0] == "shifts" && parsedPath[1].toInt() > 1 -> {
                 statusCode = ERROR_CODE
-                "Cannot find shift associated with this ID"
+                "{\n" +
+                        "  \"status\": 400,\n" +
+                        "  \"message\": \"Cannot find shift associated with this ID\"\n" +
+                        "}"
             }
             else -> {
                 //catching everything else
                 statusCode = ERROR_CODE
-                "Malformed request"
+                "{\n" +
+                        "  \"status\": 400,\n" +
+                        "  \"message\": \"Malformed request\"\n" +
+                        "}"
             }
         }
         return Response.Builder()

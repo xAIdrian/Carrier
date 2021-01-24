@@ -16,5 +16,7 @@ interface ShiftDetailsMvpContract {
         fun showCarrierShift(shift: CarrierShift)
         fun errorMessage(messageString: String)
         fun showLoading(isVisible: Boolean)
+        fun showSimpleLoading(isVisible: Boolean)
+        fun postSuccess()
     }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.example.carrier.R
 import com.example.carrier.common.MvpActivity
 import com.example.carrier.model.CarrierShift
@@ -78,5 +79,13 @@ class ShiftDetailsActivity : MvpActivity<ShiftDetailsPresenter, ShiftDetailsMvpC
             driverIdView.visibility = View.VISIBLE
             driverNameView.visibility = View.VISIBLE
         }
+    }
+
+    override fun showSimpleLoading(isVisible: Boolean) {
+        loadingProgress.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    override fun postSuccess() {
+        Toast.makeText(this, getString(R.string.success), Toast.LENGTH_LONG).show()
     }
 }

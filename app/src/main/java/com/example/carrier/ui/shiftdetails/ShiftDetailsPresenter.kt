@@ -45,14 +45,14 @@ class ShiftDetailsPresenter @Inject constructor(
     override fun sendHello() {
         disposable.add(repository.postMessage()
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                mvpView?.showLoading(true)
-            }.subscribe(
+            .doOnSubscribe { mvpView?.showSimpleLoading(true) }
+            .subscribe(
                 {
-                    mvpView?.showLoading(false)
+                    mvpView?.showSimpleLoading(false)
+                    mvpView?.postSuccess()
                 },
                 {
-                    mvpView?.showLoading(false)
+                    mvpView?.showSimpleLoading(false)
                     mvpView?.errorMessage(resourceProvider.getStringRes(R.string.somethings_went_wrong))
                 }
             ))

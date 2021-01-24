@@ -48,5 +48,6 @@ open class CarrierRepository @Inject constructor(
     fun postMessage(
         id: Int = 1,
         messageBody: MessageBody = MessageBody("Hello, World!")
-    ) = carrierService.postShiftMessage(id, messageBody).subscribeOn(Schedulers.io())
+    ) = carrierService.postShiftMessage(id, messageBody)
+        .subscribeOn(Schedulers.io())
 }
